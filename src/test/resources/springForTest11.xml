@@ -1,0 +1,12 @@
+<beans>
+    <bean id="userService" class="bean.UserServiceForTest11"/>
+    <bean class="aop.frameWork.autoproxy.DefaultAdvisorAutoProxyCreater"/>
+    <bean id="beforeAdvice" class="bean.UserServiceBeforeAdviceForTest11"/>
+    <bean id="methodInterceptor" class="aop.frameWork.adapter.MethodBeforeAdviceInterceptor">
+        <property name="advice" ref="beforeAdvice"/>
+    </bean>
+    <bean id="pointcutAdvisor" class="aop.aspectJ.AspectJExpressionPointcutAdvisor">
+        <property name="expression" value="execution(* bean.IUserServiceForTest11.*(..))"/>
+        <property name="advice" ref="methodInterceptor"/>
+    </bean>
+</beans>
